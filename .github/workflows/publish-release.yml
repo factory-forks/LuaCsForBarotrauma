@@ -112,6 +112,29 @@ jobs:
           archives_dir="$(realpath -m "$CI_DIR/archives")"
           mkdir -p "$archives_dir"
 
+          refs_dir="$(realpath -m "$CI_DIR/refs")"
+          mkdir -p "${refs_dir}"
+  
+          # Archive Refs, used by mod developers
+          mv "${artifacts_dir}/Windows/Client/Publicized/Barotrauma.dll" "${refs_dir}/Windows/Barotrauma.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/DedicatedServer.dll" "${refs_dir}/Windows/DedicatedServer.dll"
+          mv "${artifacts_dir}/Linux/Client/Publicized/Barotrauma.dll" "${refs_dir}/Linux/Barotrauma.dll"
+          mv "${artifacts_dir}/Linux/Client/Publicized/DedicatedServer.dll" "${refs_dir}/Linux/DedicatedServer.dll"
+          mv "${artifacts_dir}/Mac/Client/Publicized/Barotrauma.dll" "${refs_dir}/OSX/Barotrauma.dll"
+          mv "${artifacts_dir}/Mac/Client/Publicized/DedicatedServer.dll" "${refs_dir}/OSX/DedicatedServer.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/MonoGame.Framework.Windows.NetStandard.dll" "${refs_dir}/MonoGame.Framework.Windows.NetStandard.dll"
+          mv "${artifacts_dir}/Linux/Client/Publicized/MonoGame.Framework.Linux.NetStandard.dll" "${refs_dir}/MonoGame.Framework.Linux.NetStandard.dll"
+          mv "${artifacts_dir}/Mac/Client/Publicized/MonoGame.Framework.MacOS.NetStandard.dll" "${refs_dir}/MonoGame.Framework.MacOS.NetStandard.dll"
+          # Those are the same across all the platforms, so i guess it doesn't matter?
+          mv "${artifacts_dir}/Windows/Client/Publicized/0Harmony.dll" "${refs_dir}/0Harmony.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/Farseer.NetStandard.dll" "${refs_dir}/Farseer.NetStandard.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/Lidgren.NetStandard.dll" "${refs_dir}/Lidgren.NetStandard.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/Mono.Cecil.dll" "${refs_dir}/Mono.Cecil.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/MonoMod.Common.dll" "${refs_dir}/MonoMod.Common.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/MoonSharp.Interpreter.dll" "${refs_dir}/MoonSharp.Interpreter.dll"
+          mv "${artifacts_dir}/Windows/Client/Publicized/XNATypes.dll" "${refs_dir}/XNATypes.dll"
+          zip --must-match -qr "${archives_dir}/${ARCHIVE_BASE_NAME}_refs.zip" "${refs_dir}/*"
+
           for i in "${!RELEASES[@]}"; do
             [[ -z "${RELEASES[i]}" ]] && continue
             (
