@@ -136,7 +136,7 @@ jobs:
           mv "${artifacts_dir}/Windows/Client/Publicized/MonoMod.Common.dll" "${refs_dir}/MonoMod.Common.dll"
           mv "${artifacts_dir}/Windows/Client/Publicized/MoonSharp.Interpreter.dll" "${refs_dir}/MoonSharp.Interpreter.dll"
           mv "${artifacts_dir}/Windows/Client/Publicized/XNATypes.dll" "${refs_dir}/XNATypes.dll"
-          zip --must-match -qr "${archives_dir}/${ARCHIVE_BASE_NAME}_refs.zip" "${refs_dir}/*"
+          zip -r "${archives_dir}/${ARCHIVE_BASE_NAME}_refs.zip" "${refs_dir}"
 
           for i in "${!RELEASES[@]}"; do
             [[ -z "${RELEASES[i]}" ]] && continue
