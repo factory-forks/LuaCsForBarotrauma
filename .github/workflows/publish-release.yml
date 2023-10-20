@@ -114,7 +114,10 @@ jobs:
 
           refs_dir="$(realpath -m "$CI_DIR/refs")"
           mkdir -p "${refs_dir}"
-  
+          mkdir -p "${refs_dir}/Windows"
+          mkdir -p "${refs_dir}/Linux"
+          mkdir -p "${refs_dir}/OSX"
+          
           # Archive Refs, used by mod developers
           mv "${artifacts_dir}/Windows/Client/Publicized/Barotrauma.dll" "${refs_dir}/Windows/Barotrauma.dll"
           mv "${artifacts_dir}/Windows/Client/Publicized/DedicatedServer.dll" "${refs_dir}/Windows/DedicatedServer.dll"
